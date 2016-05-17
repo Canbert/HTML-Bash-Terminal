@@ -27,7 +27,7 @@ $("#input").keypress(function(event) {
             args[0] = input.substring(0);
         }
 
-        output.append("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ " + args.join(" "));
+        output.append("<p><span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ " + args.join(" ") + "</p>");
 
         switch (args[0]){
             case "help":
@@ -61,10 +61,12 @@ $("#input").keypress(function(event) {
 
 //Displays list of commands
 function help() {
-    console.log("help command");
     var help = [
         "help",
-        "echo [arg]"
+        "echo [arg]",
+        "ls",
+        "cd [arg]",
+        "clear"
     ];
     help.sort();
 
@@ -75,8 +77,7 @@ function help() {
 
 //List all the folders and files in the current directory
 function ls() {
-    console.log("ls command");
-    output.append("<p>README.md</p>");
+    output.append("<p>README.txt</p>");
 
 }
 
@@ -87,7 +88,6 @@ function cd(arg) {
 
 //Echo text that the user provides
 function echo(arg){
-    console.log("echo command");
     console.log(arg);
     if(arg != null){
         output.append("<p>" + arg + "</p>");
@@ -100,13 +100,11 @@ function echo(arg){
 
 //Clear the console
 function clear(){
-    console.log("clear command");
     output.empty();
 }
 
 //Add images to the page that revolve around the "ay lmao" meme
 function ay(arg) {
-    console.log("ay command");
     if(arg == "lmao"){
         output.append('<img src="https://lh6.googleusercontent.com/-QNfycKTbXDc/VzN7nl1I4xI/AAAAAAAAAR4/96nRKsbGr5Qhm0WMMWxZbChjOUhiVgR8wCL0B/w776-h875-no/2016-05-11.png">');
     }
