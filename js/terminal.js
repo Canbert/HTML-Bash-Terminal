@@ -95,10 +95,10 @@ function clear(){
 function ay(arg) {
     console.log("ay command");
     if(arg == "lmao"){
-        output.append('<img height="500px" src="https://lh6.googleusercontent.com/-QNfycKTbXDc/VzN7nl1I4xI/AAAAAAAAAR4/96nRKsbGr5Qhm0WMMWxZbChjOUhiVgR8wCL0B/w776-h875-no/2016-05-11.png">');
+        output.append('<img src="https://lh6.googleusercontent.com/-QNfycKTbXDc/VzN7nl1I4xI/AAAAAAAAAR4/96nRKsbGr5Qhm0WMMWxZbChjOUhiVgR8wCL0B/w776-h875-no/2016-05-11.png">');
     }
     else if(arg == "la mayo"){
-        output.append('<img height="500px" src="https://40.media.tumblr.com/6fa311e06dae0cc061f9670e76819ca2/tumblr_n9mx2fTr7e1sxfvy5o1_1280.png">');
+        output.append('<img src="https://40.media.tumblr.com/6fa311e06dae0cc061f9670e76819ca2/tumblr_n9mx2fTr7e1sxfvy5o1_1280.png">');
     }
     else{
         output.append("<p>'ay' requires an argument</p>");

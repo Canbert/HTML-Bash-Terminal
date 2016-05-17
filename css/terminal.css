@@ -6,23 +6,40 @@
 
 body{
     background-color: black;
-    overflow-x: hidden;
+    /*padding: 0;*/
+    /*margin: 0;*/
+    /*overflow-x: hidden;*/
 }
 
 img{
     display: block;
+    min-width: 400px;
+    width: 20vw;
 }
 
 p{
     margin: 0;
     padding: 0;
 }
-
-input{
-    border: none;
-    background-color: transparent;
+#input-container{
+    display: table;
     width: 100%;
 }
-input:focus{
+#input-label{
+    display: table-cell;
+    /*background-color: blue;*/
+    width: 15em;
+}
+
+#input-span{
+    display: table-cell;
+    width: 100%;
+}
+#input{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+#input:focus{
     outline: none;
 }
