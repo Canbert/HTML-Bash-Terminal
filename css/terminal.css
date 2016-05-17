@@ -1,0 +1,28 @@
+*{
+    font-family: monospace;
+    font-size: 16px;
+    color: #cccccc;
+}
+
+body{
+    background-color: black;
+    overflow-x: hidden;
+}
+
+img{
+    display: block;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+input{
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+input:focus{
+    outline: none;
+}
