@@ -2,10 +2,12 @@
 
 var output = $('#console');
 
+var currentDir = "/";
+
 output.append(
     "<p>HTML-Bash-Terminal</p></br>"
     + "<p>HTML-Bash-Terminal login: root (automatic login)</p>");
-$('#input-label').html("<span style='color: red'>root</span>@HTML-Bash-Terminal ~ $ ");
+$('#input-label').html("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ ");
 
 //Check for a command when the enter button is pressed in the input field
 $("#input").keypress(function(event) {
@@ -25,6 +27,8 @@ $("#input").keypress(function(event) {
             args[0] = input.substring(0);
         }
 
+        output.append("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ " + args.join(" "));
+
         switch (args[0]){
             case "help":
                 help();
@@ -36,6 +40,10 @@ $("#input").keypress(function(event) {
                 clear();
                 break;
             case "ls":
+                ls();
+                break;
+            case "cd":
+                cd(args[1]);
                 break;
             case "ay":
                 ay(args[1]);
@@ -60,8 +68,6 @@ function help() {
     ];
     help.sort();
 
-    output.append("Bash commands")
-
     for(var i = 0;i < help.length;i++){
         output.append("<p>" + help[i] + "</p>");
     }
@@ -69,6 +75,13 @@ function help() {
 
 //List all the folders and files in the current directory
 function ls() {
+    console.log("ls command");
+    output.append("<p>README.md</p>");
+
+}
+
+//Go to a specific directory
+function cd(arg) {
 
 }
 
