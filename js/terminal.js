@@ -1,6 +1,6 @@
 
 
-var output = $('#console');
+var output = $('#previous-commands');
 
 var currentDir = "/";
 
@@ -8,6 +8,24 @@ output.append(
     "<p>HTML-Bash-Terminal</p></br>"
     + "<p>HTML-Bash-Terminal login: root (automatic login)</p>");
 $('#input-label').html("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ ");
+
+function setInputSize() {
+
+    var width = $('#input-container').width() - $('#input-label').width();
+
+    $('#input').width(width);
+}
+
+
+$(document).ready(function () {
+   setInputSize();
+});
+
+
+
+$(window).on('resize', function(){
+    setInputSize();
+});
 
 //Check for a command when the enter button is pressed in the input field
 $("#input").keypress(function(event) {
