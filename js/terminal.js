@@ -1,13 +1,7 @@
 
-
 var output = $('#previous-commands');
 
 var currentDir = "/";
-
-output.append(
-    "<p>HTML-Bash-Terminal</p></br>"
-    + "<p>HTML-Bash-Terminal login: root (automatic login)</p>");
-$('#input-label').html("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ ");
 
 function setInputSize() {
 
@@ -16,12 +10,15 @@ function setInputSize() {
     $('#input').width(width);
 }
 
-
 $(document).ready(function () {
-   setInputSize();
+
+    output.append(
+        "<p>HTML-Bash-Terminal</p></br>"
+        + "<p>HTML-Bash-Terminal login: root (automatic login)</p>");
+    $('#input-label').html("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ ");
+
+    setInputSize();
 });
-
-
 
 $(window).on('resize', function(){
     setInputSize();

@@ -1,11 +1,11 @@
 *{
     font-family: monospace;
     font-size: 16px;
-    color: #cccccc;
+    color: #d1dddd;
 }
 
 body{
-    background-color: black;
+    background-color: #333333;
     padding: 0;
     margin: 0;
     overflow-y: scroll;
@@ -41,4 +41,16 @@ p{
 }
 #input:focus{
     outline: none;
+}
+
+::-webkit-scrollbar {
+    background-color: #444444;
+    width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #222222;
+    border-radius: 3px;
+    border: 2px solid transparent;
+    background-clip: content-box;
 }
