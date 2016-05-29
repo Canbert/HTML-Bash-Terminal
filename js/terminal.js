@@ -2,7 +2,7 @@
 * USER CLASS
 * */
 function User(){
-    this.name = "guest";
+    this.name = "root";
 }
 
 User.prototype.toString = function userToString() {
@@ -87,6 +87,9 @@ function TerminalCommands(parent) {
 function Terminal(){
 
     this.user = new User();
+
+    this.startText = "<p>HTML-Bash-Terminal</p></br><p>HTML-Bash-Terminal login: " + this.user + " (automatic login)</p>";
+
     this.beginCmd = "<span style='color: red'>" + this.user + "</span>@HTML-Bash-Terminal:$ ";
 
     this.commands = new TerminalCommands(this);
@@ -101,7 +104,7 @@ function Terminal(){
         this.historyIndex = this.commandsHistory.length;
     }
 
-    //Add <p> tag to printLine
+    //Add the output to the terminal with padded "<p>" tags
     this.printLine = function(out) {
         if(out == null){
             $('#previous-commands').append("</br>");
@@ -110,15 +113,23 @@ function Terminal(){
             $('#previous-commands').append("<p>" + out + "</p>");
         }
     }
+
+    //Add the output to the terminal with no tags
+    this.print = function (out) {
+        if(out == null){
+            $('#previous-commands').append("</br>");
+        }
+        else{
+            $('#previous-commands').append(out);
+        }
+    }
 }
 
 $(document).ready(function () {
 
     var terminal = new Terminal();
 
-    terminal.printLine("HTML-Bash-Terminal");
-    terminal.printLine();
-    terminal.printLine("HTML-Bash-Terminal login: " + terminal.user + " (automatic login)");
+    terminal.print(terminal.startText);
 
     $('#input-label').html(terminal.beginCmd);
 
@@ -154,6 +165,7 @@ $(document).ready(function () {
 
             //Commands the user can input into the terminal
             if(!isNullOrWhitespace(args[0])) {
+
                 switch (args[0]) {
                     case "help":
                         terminal.commands.help();
