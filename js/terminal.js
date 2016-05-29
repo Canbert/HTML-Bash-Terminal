@@ -179,6 +179,9 @@ $(document).ready(function () {
                     case "history":
                         terminal.commands.history();
                         break;
+                    case "ls":
+                        terminal.commands.ls();
+                        break;
                     case "ay":
                         terminal.commands.ay(args[1])
                         break;
