@@ -3,11 +3,20 @@ var output = $('#previous-commands');
 
 var currentDir = "/";
 
+var history = [];
+
 function setInputSize() {
 
     var width = $('#input-container').width() - $('#input-label').width();
 
     $('#input').width(width);
+}
+
+function isNullOrWhitespace( input ) {
+
+    if (typeof input === 'undefined' || input == null) return true;
+
+    return input.replace(/\s/g, '').length < 1;
 }
 
 $(document).ready(function () {
@@ -44,33 +53,34 @@ $("#input").keypress(function(event) {
 
         output.append("<p><span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ " + args.join(" ") + "</p>");
 
-        switch (args[0]){
-            case "help":
-                help();
-                break;
-            case "echo":
-                echo(args[1]);
-                break;
-            case "clear":
-                clear();
-                break;
-            case "ls":
-                ls();
-                break;
-            case "cd":
-                cd(args[1]);
-                break;
-            case "ay":
-                ay(args[1]);
-                break;
-            default:
-                output.append("<p>" +  args[0] + ": command not found</p>");
+        if(!isNullOrWhitespace(args[0])) {
+            switch (args[0]) {
+                case "help":
+                    help();
+                    break;
+                case "echo":
+                    echo(args[1]);
+                    break;
+                case "clear":
+                    clear();
+                    break;
+                case "ls":
+                    ls();
+                    break;
+                case "cd":
+                    cd(args[1]);
+                    break;
+                case "ay":
+                    ay(args[1]);
+                    break;
+                default:
+                    output.append("<p>" + args[0] + ": command not found</p>");
+            }
+            //Scroll the page to the bottom
+            $("body").scrollTop($("body")[0].scrollHeight);
+            //Empty the input box
+            $('#input').val("");
         }
-
-        //Scroll the page to the bottom
-        $("body").scrollTop($("body")[0].scrollHeight);
-        //Empty the input box
-        $('#input').val("");
     }
 });
 
