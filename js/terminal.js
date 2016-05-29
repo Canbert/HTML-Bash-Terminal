@@ -1,9 +1,18 @@
+var cmdsHistory = new function () {
+    this.commands = [];
+    this.get = function(){
+        for(var i = 0;i<this.commands.length;i++){
+            printLine((i+1) + ". " + this.commands[i]);
+        }
+    };
+    this.add = function(val){
+        this.commands.push(val);
+    }
+};
 
-var output = $('#previous-commands');
+var user = "root";
 
-var currentDir = "/";
-
-var history = [];
+var beginLine = "<span style='color: red'>" + user + "</span>@HTML-Bash-Terminal:$ ";
 
 function setInputSize() {
 
@@ -21,10 +30,13 @@ function isNullOrWhitespace( input ) {
 
 $(document).ready(function () {
 
-    output.append(
-        "<p>HTML-Bash-Terminal</p></br>"
-        + "<p>HTML-Bash-Terminal login: root (automatic login)</p>");
-    $('#input-label').html("<span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ ");
+    console.log(cmdsHistory.test);
+
+    printLine("HTML-Bash-Terminal");
+    printLine();
+    printLine("HTML-Bash-Terminal login: root (automatic login)");
+
+    $('#input-label').html(beginLine);
 
     setInputSize();
 });
@@ -51,7 +63,11 @@ $("#input").keypress(function(event) {
             args[0] = input.substring(0);
         }
 
-        output.append("<p><span style='color: red'>root</span>@HTML-Bash-Terminal:" + currentDir + "$ " + args.join(" ") + "</p>");
+        //Print the command just entered
+        printLine(beginLine + args.join(" "));
+
+        //Add to the cmdsHistory
+        cmdsHistory.add(args.join(" "));
 
         if(!isNullOrWhitespace(args[0])) {
             switch (args[0]) {
@@ -70,12 +86,16 @@ $("#input").keypress(function(event) {
                 case "cd":
                     cd(args[1]);
                     break;
+                case "history":
+                    cmdsHistory.get();
+                    break;
                 case "ay":
                     ay(args[1]);
                     break;
                 default:
-                    output.append("<p>" + args[0] + ": command not found</p>");
+                    printLine(args[0] + ": command not found");
             }
+
             //Scroll the page to the bottom
             $("body").scrollTop($("body")[0].scrollHeight);
             //Empty the input box
@@ -83,6 +103,21 @@ $("#input").keypress(function(event) {
         }
     }
 });
+
+//Add <p> tag to printLine
+function printLine(out) {
+    if(out == null){
+        $('#previous-commands').append("</br>");
+    }
+    else{
+        $('#previous-commands').append("<p>" + out + "</p>");
+    }
+}
+
+//Clear the console
+function clear(){
+    $('#previous-commands').empty();
+}
 
 //Displays list of commands
 function help() {
@@ -96,13 +131,13 @@ function help() {
     help.sort();
 
     for(var i = 0;i < help.length;i++){
-        output.append("<p>" + help[i] + "</p>");
+        printLine(help[i]);
     }
 }
 
 //List all the folders and files in the current directory
 function ls() {
-    output.append("<p>README.txt</p>");
+    printLine("README.txt");
 
 }
 
@@ -115,28 +150,16 @@ function cd(arg) {
 function echo(arg){
     console.log(arg);
     if(arg != null){
-        output.append("<p>" + arg + "</p>");
+        printLine(arg);
     }
-    else{
-
-    }
-
-}
-
-//Clear the console
-function clear(){
-    output.empty();
 }
 
 //Add images to the page that revolve around the "ay lmao" meme
 function ay(arg) {
     if(arg == "lmao"){
-        output.append('<img src="https://lh6.googleusercontent.com/-QNfycKTbXDc/VzN7nl1I4xI/AAAAAAAAAR4/96nRKsbGr5Qhm0WMMWxZbChjOUhiVgR8wCL0B/w776-h875-no/2016-05-11.png">');
+        $('#previous-commands').append('<img src="https://lh6.googleusercontent.com/-QNfycKTbXDc/VzN7nl1I4xI/AAAAAAAAAR4/96nRKsbGr5Qhm0WMMWxZbChjOUhiVgR8wCL0B/w776-h875-no/2016-05-11.png">');
     }
     else if(arg == "la mayo"){
-        output.append('<img src="https://40.media.tumblr.com/6fa311e06dae0cc061f9670e76819ca2/tumblr_n9mx2fTr7e1sxfvy5o1_1280.png">');
-    }
-    else{
-        output.append("<p>'ay' requires an argument</p>");
+        $('#previous-commands').append('<img src="https://40.media.tumblr.com/6fa311e06dae0cc061f9670e76819ca2/tumblr_n9mx2fTr7e1sxfvy5o1_1280.png">');
     }
 }
