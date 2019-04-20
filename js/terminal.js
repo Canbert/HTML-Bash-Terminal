@@ -6,6 +6,7 @@ class Terminal{
     constructor(user){
         this.user = user;
         this.previousCommands = '#previous-commands';
+        this.commands = {history:new History()};
     }
 
     startText(){

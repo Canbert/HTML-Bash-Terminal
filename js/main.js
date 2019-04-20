@@ -38,7 +38,7 @@ $(document).ready(function () {
             terminal.printLine(terminal.beginCmd() + args.join(" "));
 
             //Add to the history
-            // terminal.addHistory(args.join(" "));
+            terminal.commands.history.add(args.join(" "));
 
             //Commands the user can input into the terminal
             if(!isNullOrWhitespace(args[0])) {
@@ -54,7 +54,7 @@ $(document).ready(function () {
                         terminal.commands.clear();
                         break;
                     case "history":
-                        terminal.commands.history();
+                        terminal.commands.history.print();
                         break;
                     case "ls":
                         terminal.commands.ls();
